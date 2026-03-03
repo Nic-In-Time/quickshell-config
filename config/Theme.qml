@@ -1,0 +1,27 @@
+pragma Singleton
+import QtQuick
+
+
+QtObject {
+    readonly property string colBg:     "#1a1b26"
+    readonly property string colFg:     "#a9b1d6"
+    readonly property string colMuted:  "#444b6a"
+    readonly property string colCyan:   "#0db9d7"
+    readonly property string colPurple: "#ad8ee6"
+    readonly property string colRed:    "#f7768e"
+    readonly property string colYellow: "#e0af68"
+    readonly property string colBlue:   "#7aa2f7"
+
+    //App launcher
+    readonly property string semiTransBackground: '#79000000'
+    readonly property string bgBase: '#152b2c'
+    readonly property string bgBorder: "#32364a"
+    readonly property string bgSurface: "#24283b"
+    readonly property color bgSelected: "#283457"
+    readonly property color accentPrimary: "#7aa2f7"
+    readonly property string launcherPrimaryText: '#d8d8d8'
+
+
+    readonly property string fontFamily: "JetBrainsMono Nerd Font"
+    readonly property int fontSize:   14
+}
