@@ -12,6 +12,9 @@ QtObject {
     readonly property string colYellow: "#e0af68"
     readonly property string colBlue:   "#7aa2f7"
 
+    readonly property string inactiveTab: '#7027f8'
+    readonly property string activeTab: '#276df8'
+
     //App launcher
     readonly property string semiTransBackground: '#79000000'
     readonly property string bgBase: '#152b2c'

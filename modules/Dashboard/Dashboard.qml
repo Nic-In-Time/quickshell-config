@@ -53,7 +53,7 @@ Scope {
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             Rectangle {
-                color: "blue"
+                color: currentTab == "media" ? Config.Theme.activeTab : Config.Theme.inactiveTab
                 anchors.left: parent.left
                 anchors.top: parent.top
                 id: mediaButton
@@ -70,7 +70,7 @@ Scope {
                 }
             }
             Rectangle {
-                color: "green"
+                color: currentTab == "power" ? Config.Theme.activeTab : Config.Theme.inactiveTab
                 anchors.left: mediaButton.right
                 id: powerButton
                 height: parent.height
