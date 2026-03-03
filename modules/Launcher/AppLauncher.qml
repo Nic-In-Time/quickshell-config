@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "../../config" as Config
+import qs.config as Config
 
 Scope {
     id: root

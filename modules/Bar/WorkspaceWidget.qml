@@ -3,7 +3,8 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
-import "../../config" as Config
+
+import qs.config as Config
 
 RowLayout {
     implicitHeight: Config.BarConfig.height

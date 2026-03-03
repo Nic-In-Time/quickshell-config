@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 
-import "../../config" as Config
-import "../../services" as Services
+import qs.config as Config
+import qs.services as Services
 
 RowLayout {
     
@@ -20,13 +20,13 @@ RowLayout {
     }
     Text {
         id: pausePlay
-        text: Services.MediaPlayer.activeSpotifyPlayer === null ? "󱃓" : Services.MediaPlayer.activeSpotifyPlayer.playbackState == true ? "󰏤" : "󰐊" 
+        text: Services.MediaPlayer.activeSpotifyPlayer.playbackState == true ? "󰏤" : "󰐊" 
         color: "white"
         font.family: Config.Theme.fontFamily
         font.pixelSize: Config.Theme.fontSize
         MouseArea {
             anchors.fill: parent
-            onClicked: Services.MediaPlayer.activeSpotifyPlayer == null ? nothing() : Services.MediaPlayer.activeSpotifyPlayer.isPlaying === true ? Services.MediaPlayer.activeSpotifyPlayer.pause() : Services.MediaPlayer.activeSpotifyPlayer.play()
+            onClicked: Services.MediaPlayer.activeSpotifyPlayer.isPlaying === true ? Services.MediaPlayer.activeSpotifyPlayer.pause() : Services.MediaPlayer.activeSpotifyPlayer.play()
         }
     }
     Text {

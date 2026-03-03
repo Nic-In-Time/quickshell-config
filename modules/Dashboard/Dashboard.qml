@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Controls
 import qs.Types
 
-import "../../config" as Config
+import qs.config as Config
 
 Scope {
     

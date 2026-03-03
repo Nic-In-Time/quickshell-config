@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
 
-import "../../config" as Config
+import qs.config as Config
 
 Rectangle {
     id: root

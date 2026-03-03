@@ -1,8 +1,8 @@
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
-import "../../config" as Config
-import "../Dashboard"
+import qs.config as Config
+import "../Dashboard/"
 
 Scope {
     property bool dashboardOpen: false
@@ -44,11 +44,13 @@ Scope {
         
 
         Rectangle {
-            anchors.right: battery.left
-            width: 40
+            anchors.right: betweenBatteryAndDash.left
+            width: dashText.width
             height: 30
+            color: "transparent"
             Text {
-                text: "hi"
+                id: dashText
+                text: "Open Dashboard"
                 color: "white"
             }
             MouseArea {
@@ -57,6 +59,7 @@ Scope {
                 onClicked: dashboard.toggle()
             }
         }
+        BarSpacer {id: betweenBatteryAndDash; anchors.right: battery.left}
         BatteryWidget {
             id: battery
             anchors.right: betweenMediaAndBattery.left
