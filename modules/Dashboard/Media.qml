@@ -4,62 +4,33 @@ import QtQuick
 import QtQuick.Layouts
 
 import "../../config" as Config
+import "../../services" as Services
 
 Rectangle {
+    id: root
     width: mediaText.width
     height: mediaText.height + cover.height + 10
     color: "transparent"
     
-    property list<MprisPlayer> players: Mpris.players.values
-    property var activeSpotifyPlayer: players.filter(player => isSpotify(player))[0] ?? null
-    visible: activeSpotifyPlayer != null
+    
+    
     
     RowLayout {
+        //visible: activeSpotifyPlayer === null ? false : true
         id: mediaText
         Text {
             id: title
-            text: activeSpotifyPlayer.trackTitle || "Unknown Title"
+            text: Services.MediaPlayer.activeSpotifyPlayer != null ? Services.MediaPlayer.activeSpotifyPlayer.trackTitle : ""
             color: "white"
             font.family: Config.Theme.fontFamily
             font.pixelSize: Config.Theme.fontSize
         }
         
-        Text {
-            id: back
-            text: "󰒮"
-            color: "white"
-            font.family: Config.Theme.fontFamily
-            font.pixelSize: Config.Theme.fontSize
-            MouseArea {
-                anchors.fill: parent
-                onClicked: activeSpotifyPlayer.previous()
-            }
-        }
-        Text {
-            id: pausePlay
-            text: activeSpotifyPlayer.playbackState == true ? "󰏤" : "󰐊"
-            color: "white"
-            font.family: Config.Theme.fontFamily
-            font.pixelSize: Config.Theme.fontSize
-            MouseArea {
-                anchors.fill: parent
-                onClicked: activeSpotifyPlayer.isPlaying === true ? activeSpotifyPlayer.pause() : activeSpotifyPlayer.play()
-            }
-        }
-        Text {
-            id: next
-            text: "󰒭"
-            color: "white"
-            font.family: Config.Theme.fontFamily
-            font.pixelSize: Config.Theme.fontSize
-            MouseArea {
-                anchors.fill: parent
-                onClicked: activeSpotifyPlayer.next()
-            }
-        }
+        MediaButtons {}
     }
         
     Rectangle {
+        //visible: activeSpotifyPlayer === null ? false : true
         id: cover
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
@@ -76,7 +47,7 @@ Rectangle {
 
             anchors.fill: parent
 
-            source: activeSpotifyPlayer.trackArtUrl ?? "" // qmllint disable incompatible-type
+            source: Services.MediaPlayer.activeSpotifyPlayer != null ? Services.MediaPlayer.activeSpotifyPlayer.trackArtUrl ?? "" : "" // qmllint disable incompatible-type
             asynchronous: true
             fillMode: Image.PreserveAspectCrop
             sourceSize.width: width
