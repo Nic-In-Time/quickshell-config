@@ -8,6 +8,7 @@ import Quickshell
 Singleton {
     property list<MprisPlayer> players: Mpris.players.values
     property var activeSpotifyPlayer: players.filter(player => isSpotify(player))[0] ?? null
+    property MprisPlayer activePlayer: players[0]
 
     function isSpotify(player) {
         return player.dbusName === "org.mpris.MediaPlayer2.spotify" ? player : nothing()

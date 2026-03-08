@@ -235,7 +235,7 @@ Scope {
                         width: resultsList.width
                         height: 44
                         radius: 8
-                        color: hoverArea.containsMouse && root.selectedIndex !== index ? root.theme.bgHover : "transparent"
+                        color: hoverArea.containsMouse && root.selectedIndex !== index ? Config.Theme.bgHover : "transparent"
 
                         Behavior on color {
                             ColorAnimation { duration: 100 }

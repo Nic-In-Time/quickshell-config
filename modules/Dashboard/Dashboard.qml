@@ -26,6 +26,22 @@ Scope {
     property string currentTab: "media"
     property int numButtons: 2
     PanelWindow {
+        /*PanelWindow {
+            exclusionMode: ExclusionMode.Ignore
+            focusable: false
+            anchors {
+                top:true
+                left:true
+                right:true
+                bottom:true
+            }
+            visible: dashboardPanel.visible
+            color: "transparent"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: dashboardPanel.visible = false
+            }
+        }*/
         visible: false
         id: dashboardPanel
         exclusiveZone: 0

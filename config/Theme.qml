@@ -18,7 +18,8 @@ QtObject {
     //App launcher
     readonly property string semiTransBackground: '#79000000'
     readonly property string bgBase: '#152b2c'
-    readonly property string bgBorder: "#32364a"
+    readonly property string bgHover: "#24283b"
+    readonly property string bgBorder: '#2c3149'
     readonly property string bgSurface: "#24283b"
     readonly property color bgSelected: "#283457"
     readonly property color accentPrimary: "#7aa2f7"

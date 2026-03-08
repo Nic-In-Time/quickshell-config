@@ -8,11 +8,15 @@ import qs.config as Config
 
 RowLayout {
     implicitHeight: Config.BarConfig.height
-    
+    property var workspaceCountGreaterThan10: Hyprland.workspaces.values.filter(ws => isUnnamed(ws)).length
+    property var workspaceGreaterThan10: Hyprland.workspaces.values.filter(ws => isUnnamed(ws))
+    property int workspaceCount: workspaceCountGreaterThan10 + 10
+
 
 
     Repeater {
-        model: 10
+        model: workspaceCount //(10 /* + workspaceCountGreaterThan10*/)
+        //onItemAdded: console.log(workspaceCount)
 
         Rectangle {
 
@@ -22,13 +26,13 @@ RowLayout {
             Layout.preferredHeight: parent.height
             color: "transparent"
 
-            property var workspace: Hyprland.workspaces.values.find(ws => ws.id === index + 1) ?? null
-            property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+            property var workspace: index > 9 ? workspaceGreaterThan10[index - 10] : Hyprland.workspaces.values.find(ws => ws.id === index + 1) ?? null
+            property bool isActive: index > 9 ? Hyprland.focusedWorkspace?.id == workspaceGreaterThan10[index - 10].id : Hyprland.focusedWorkspace?.id === (index + 1)
             property bool hasWindows: workspace !== null
 
             Text {
                 id: text
-                text: index + 1
+                text: index > 9 ? workspaceGreaterThan10[index - 10].id : index + 1
                 color: parent.isActive ? Config.Theme.colPurple : (parent.hasWindows ? Config.Theme.colCyan : Config.Theme.colMuted)
                 font.pixelSize: Config.Theme.fontSize
                 font.family: Config.Theme.fontFamily
@@ -48,12 +52,18 @@ RowLayout {
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent
-                onClicked: Hyprland.dispatch("workspace " + (index + 1))
+                onClicked: Hyprland.dispatch("workspace " + (index > 9 ? workspaceGreaterThan10[index - 10].id : index + 1))
                 hoverEnabled: true
                 
                 onEntered: rectangle.color = Qt.rgba(0.92, 0.31, 1, 0.47)
                 onExited: rectangle.color = "transparent"
             }
         }
+    }
+    function isUnnamed(workspace) {
+        if (workspace.id > 10) {
+            return workspace
+        } 
+        return false
     }
 }

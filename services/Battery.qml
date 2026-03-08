@@ -7,7 +7,7 @@ import Quickshell.Services.UPower
 Singleton {
     
 
-    readonly property string batteryInfo: (percentage > 0.90 ? " " : percentage > 0.75 ? " " : percentage > 0.50 ? " " :  percentage > 0.25 ? " " : " ") + percentage * 100 + "%"
+    readonly property string batteryInfo: (UPower.onBattery ? "" : "󱐋") + (percentage > 0.90 ? " " : percentage > 0.75 ? " " : percentage > 0.50 ? " " :  percentage > 0.25 ? " " : " ") + percentage * 100 + "%"
 
     readonly property real percentage: UPower.displayDevice?.percentage ?? 1
 }

@@ -1,8 +1,12 @@
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
+import Quickshell.Io
+
 import qs.config as Config
 import "../Dashboard/"
+//For testing
+import qs.services as Services
 
 Scope {
     property bool dashboardOpen: false
@@ -41,9 +45,27 @@ Scope {
         WorkspaceWidget {id: workspaces}
 
         WindowTitle {}
+
+        /*Rectangle {
+            anchors.right: betweenDashAndPower.left
+            width: 30
+            height: parent.height
+            color: "transparent"
+            Text {
+                anchors.centerIn: parent
+                text: "⏻"
+                color: "white"
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: powerMenu()
+            }
+        }*/
         
+        BarSpacer {id: betweenDashAndPower; anchors.right: dash.left}
 
         Rectangle {
+            id: dash
             anchors.right: betweenBatteryAndDash.left
             width: dashText.width
             height: 30
@@ -57,6 +79,9 @@ Scope {
                 anchors.fill: parent
                 
                 onClicked: dashboard.toggle()
+                hoverEnabled: true
+                //For testing
+                onEntered: console.log(Services.MediaPlayer.players.length + " " + Services.MediaPlayer.players)
             }
         }
         BarSpacer {id: betweenBatteryAndDash; anchors.right: battery.left}
@@ -75,4 +100,11 @@ Scope {
         BarSpacer {id: rightSpacer; anchors.right: parent.right; width: 5}
     }
     Dashboard {id: dashboard}
+    function powerMenu() {
+        
+        Quickshell.execDetached ({
+            command: ["~/.config/nic4k/wlogout.sh"]
+        })
+        
+    }
 }

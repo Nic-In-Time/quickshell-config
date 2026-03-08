@@ -1,18 +1,13 @@
+import Quickshell
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Services.UPower
 
 import qs.config as Config
-import "power/"
 
 Rectangle {
-    id: root
-    
+    height: powerProfileIcons.height + topText.height
     color: "transparent"
-    width: parent.width
-    anchors.horizontalCenter: parent.horizontalCenter
-    PowerProfiles {width: parent.width / 2; id: powerProfiles; anchors.left: powerStatus.right}
-    /*Text {
+    Text {
         id: topText
         anchors.horizontalCenter: parent.horizontalCenter
         text: "Power Profiles"
@@ -80,12 +75,9 @@ Rectangle {
                 anchors.centerIn: parent
             }
             MouseArea {
-                anchors.fill: parenttransparent
+                anchors.fill: parent
                 onClicked: PowerProfiles.profile = 0
             }
         }
-    }*/
-    PowerStatus {width: parent.width / 2; id: powerStatus}
-    
-    
+    }
 }
