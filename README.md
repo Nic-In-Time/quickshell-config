@@ -35,3 +35,7 @@ This config is a work in progress.
 - Media Panel overhaul
 - More default themes
 - And much more!
+
+## Awknowledgements
+
+- Thanks to doannci2212 for the app launcher from <a href="https://github.com/doannc2212/quickshell-config/tree/main">quickshell-config</a>
