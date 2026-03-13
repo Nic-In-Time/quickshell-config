@@ -16,14 +16,21 @@ PanelWindow {
         target: "power"
         function toggle() {
             powerConfirmPanel.visible = !powerConfirmPanel.visible
-            console.log("hi")
+            /* Responsive power menu
+            if (launcherPanel.visible) {
+                powerInput.text = ""
+                selectedIndex = 0
+                powerInput.forceActiveFocus()
+            }
+            */
         }
     }
     
     
     id: powerConfirmPanel
     visible: false
-    focusable: false
+    focusable: true
+    //focusable: false
     color: "transparent"
 
     
@@ -41,6 +48,7 @@ PanelWindow {
     // Dark overlay backdrop
     MouseArea {
     anchors.fill: parent
+    // Add a mask of the power confirm box id
     onClicked: powerConfirmPanel.visible = false
 
         Rectangle {
@@ -51,6 +59,20 @@ PanelWindow {
 
     // Centered launcher box
     Rectangle {
+        // Trying to get responsive power menu
+        /*TextInput {
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 200
+            height: 50
+            id: powerInput
+            focus: true
+            clip: true
+            Keys.onEscapePressed: launcherPanel.visible = false
+            Text {
+
+            }
+        }*/
         id: powerConfirmBox
         anchors.centerIn: parent
         width: 580
@@ -66,18 +88,32 @@ PanelWindow {
             height: 240
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.verticalCenter
+                anchors.bottomMargin: 5
                 implicitHeight: parent.height / 2 - 10
                 width: 540
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
+                    TextInput {
+                        anchors.centerIn: parent
+                        text: "hello hi please exist"
+                        Layout.fillWidth: true
+                        color: "white"
+                    }
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "hibernate"
                     }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: hibernate.running = true
+                        hoverEnabled: true
+                        onEntered: screenOff.running = true
+                        onExited: screenOn.running = true
                     }
                     Process {
                         id: hibernate
@@ -88,9 +124,12 @@ PanelWindow {
                     }
                 }
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "logout"
                     }
@@ -107,9 +146,12 @@ PanelWindow {
                     }
                 }
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "reboot"
                     }
@@ -129,12 +171,16 @@ PanelWindow {
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.verticalCenter
+                anchors.topMargin: 5
                 implicitHeight: parent.height / 2 - 10
                 width: 540
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "Lock"
                     }
@@ -152,9 +198,12 @@ PanelWindow {
                     
                 }
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "Suspend"
                     }
@@ -171,9 +220,12 @@ PanelWindow {
                     }
                 }
                 Rectangle {
+                    radius: 5
+                    color: Config.Theme.colMuted
                     height: parent.height - 10
                     width: (parent.width / 3)
                     Text {
+                        color: "white"
                         anchors.centerIn: parent
                         text: "Power off"
                     }

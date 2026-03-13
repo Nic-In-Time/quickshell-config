@@ -69,10 +69,10 @@ Scope {
         exclusionMode: ExclusionMode.Ignore
 
         anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
+            top: true
+            bottom: true
+            left: true
+            right: true
         }
 
         // Dark overlay backdrop
@@ -80,10 +80,10 @@ Scope {
         anchors.fill: parent
         onClicked: launcherPanel.visible = false
 
-        Rectangle {
-            anchors.fill: parent
-            color: Config.Theme.semiTransBackground //root.theme.bgOverlay
-        }
+            Rectangle {
+                anchors.fill: parent
+                color: Config.Theme.semiTransBackground //root.theme.bgOverlay
+            }
         }
 
         // Centered launcher box
