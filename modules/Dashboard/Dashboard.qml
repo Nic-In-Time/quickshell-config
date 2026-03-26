@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import QtQuick
 import QtQuick.Controls
 import qs.Types
+import qs.modules.SettingsMenu
 
 import qs.config as Config
 
@@ -24,7 +25,7 @@ Scope {
     
     
     property string currentTab: "media"
-    property int numButtons: 2
+    property int numButtons: 3
     PanelWindow {
         /*PanelWindow {
             exclusionMode: ExclusionMode.Ignore
@@ -100,6 +101,21 @@ Scope {
                     onClicked: currentTab = "power"
                 }
             }
+            Rectangle {
+                color: currentTab == "settings" ? Config.Theme.activeTab : Config.Theme.inactiveTab
+                anchors.left: powerButton.right
+                id: settingsButton
+                height: parent.height
+                width: parent.width / numButtons
+                Text {
+                    text: "settings"
+                    anchors.centerIn: parent
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: currentTab = "settings"
+                }
+            }
         }
 
         /*TabBar {
@@ -137,6 +153,14 @@ Scope {
             anchors.top: tabBar.bottom
             anchors.topMargin: 3
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+        QuickSettings {
+            visible: currentTab == "settings"
+            anchors.top: tabBar.bottom
+            anchors.topMargin: 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: parent.height - tabBar.height
+            width: parent.width - 60
         }
     }
     

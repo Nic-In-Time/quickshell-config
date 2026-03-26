@@ -6,6 +6,7 @@ import "modules/Bar/"
 import "modules/Launcher/"
 import "modules/Dashboard/power/"
 import "modules/WorkspaceSwitcher/"
+import qs.modules.SettingsMenu
 
 ShellRoot{
     Scope {
@@ -21,6 +22,7 @@ ShellRoot{
         }*/
         Bar {}
         WorkspaceSwitcher {}
+        SettingsMenu {}
     }
 }
 
