@@ -28,21 +28,30 @@ Scope {
             right: true
         }
 
-        
+
         Rectangle {
             anchors.fill: parent
-            
+
             bottomLeftRadius: 5
             bottomRightRadius: 5
             color: Config.Theme.colBg
-            
+
 
         }
-        
+
 
         implicitHeight: Config.BarConfig.height
-        
+
         WorkspaceWidget {id: workspaces}
+
+        BarSpacer {id: betweenWorkspaceAndKeyboard; anchors.left: workspaces.right}
+
+        Text {
+            color: "white"
+            anchors.left: betweenWorkspaceAndKeyboard.right
+            anchors.verticalCenter: workspaces.verticalCenter
+            text: Services.LayoutService.currentLayout
+        }
 
         WindowTitle {}
 
@@ -61,7 +70,7 @@ Scope {
                 onClicked: powerMenu()
             }
         }*/
-        
+
         BarSpacer {id: betweenDashAndPower; anchors.right: dash.left}
 
         Rectangle {
@@ -77,7 +86,7 @@ Scope {
             }
             MouseArea {
                 anchors.fill: parent
-                
+
                 onClicked: dashboard.toggle()
                 hoverEnabled: true
                 //For testing
@@ -101,10 +110,10 @@ Scope {
     }
     Dashboard {id: dashboard}
     function powerMenu() {
-        
+
         Quickshell.execDetached ({
             command: ["~/.config/nic4k/wlogout.sh"]
         })
-        
+
     }
 }

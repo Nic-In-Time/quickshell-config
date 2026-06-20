@@ -8,7 +8,7 @@ import "modules/Dashboard/power/"
 import "modules/WorkspaceSwitcher/"
 import qs.modules.SettingsMenu
 
-ShellRoot{
+ShellRoot {
     Scope {
         AppLauncher {}
         /*PanelWindow {
@@ -25,4 +25,3 @@ ShellRoot{
         SettingsMenu {}
     }
 }
-

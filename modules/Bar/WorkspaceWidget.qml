@@ -12,14 +12,11 @@ RowLayout {
     property var workspaceGreaterThan10: Hyprland.workspaces.values.filter(ws => isUnnamed(ws))
     property int workspaceCount: workspaceCountGreaterThan10 + 10
 
-
-
     Repeater {
         model: workspaceCount //(10 /* + workspaceCountGreaterThan10*/)
         //onItemAdded: console.log(workspaceCount)
 
         Rectangle {
-
             id: rectangle
             Layout.maximumWidth: 28
             Layout.minimumWidth: 28
@@ -43,8 +40,7 @@ RowLayout {
             Rectangle {
                 width: 20
                 height: 3
-                color: parent.isActive ? 
-                Config.Theme.colPurple : Config.Theme.colBg
+                color: parent.isActive ? Config.Theme.colPurple : Config.Theme.colBg
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.bottom
             }
@@ -52,9 +48,11 @@ RowLayout {
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent
-                onClicked: Hyprland.dispatch("workspace " + (index > 9 ? workspaceGreaterThan10[index - 10].id : index + 1))
+
+                onClicked: Hyprland.dispatch("hl.dispatch(hl.dsp.focus({ workspace = " + (index > 9 ? workspaceGreaterThan10[index - 10].id : index + 1) + " }))")
+
                 hoverEnabled: true
-                
+
                 onEntered: rectangle.color = Qt.rgba(0.92, 0.31, 1, 0.47)
                 onExited: rectangle.color = "transparent"
             }
@@ -62,8 +60,8 @@ RowLayout {
     }
     function isUnnamed(workspace) {
         if (workspace.id > 10) {
-            return workspace
-        } 
-        return false
+            return workspace;
+        }
+        return false;
     }
 }

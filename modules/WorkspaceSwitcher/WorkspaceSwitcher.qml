@@ -14,38 +14,37 @@ Scope {
     property var theme: Config.Theme //DefaultTheme {}
     property var activeWindow
     // Whether to move window or just view
-    property var type 
+    property var type
 
     IpcHandler {
         target: "switcher"
 
         function toggleMove(): void {
-            toggle()
+            toggle();
             /*workspaceSwitcherPanel.visible = !workspaceSwitcherPanel.visible
             if (workspaceSwitcherPanel.visible) {
                 searchInput.text = ""
                 searchInput.forceActiveFocus()*/
 
-            root.type = "move"
-            console.log(type)
-            console.log("active " + Hyprland.activeToplevel.wayland.activated)
+            root.type = "move";
+            console.log(type);
+            console.log("active " + Hyprland.activeToplevel.wayland.activated);
             if (Hyprland.activeToplevel.wayland.activated !== false) {
-                activeWindow = Hyprland.activeToplevel.workspace
-                console.log(activeWindow)
-                console.log(Hyprland.activeToplevel.wayland.activated)
+                activeWindow = Hyprland.activeToplevel.workspace;
+                console.log(activeWindow);
+                console.log(Hyprland.activeToplevel.wayland.activated);
                 //Hyprland.activeToplevel.title
             } else {
-                console.log("no window")
-                workspaceSwitcherPanel.visible = false
+                console.log("no window");
+                workspaceSwitcherPanel.visible = false;
             }
-                
-                
+
             /*}*/
         }
         function toggleWorkspace(): void {
-            toggle()
-            root.type = "look"
-            console.log(type)
+            toggle();
+            root.type = "look";
+            console.log(type);
             /*workspaceSwitcherPanel.visible = !workspaceSwitcherPanel.visible
             if (workspaceSwitcherPanel.visible) {
                 searchInput.text = ""
@@ -60,8 +59,8 @@ Scope {
                     console.log("no window")
                     workspaceSwitcherPanel.visible = false
                 }
-                
-                
+
+
             }*/
         }
     }
@@ -79,16 +78,16 @@ Scope {
         exclusionMode: ExclusionMode.Ignore
 
         anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
+            top: true
+            bottom: true
+            left: true
+            right: true
         }
 
         // Dark overlay backdrop
         MouseArea {
-        anchors.fill: parent
-        onClicked: workspaceSwitcherPanel.visible = false
+            anchors.fill: parent
+            onClicked: workspaceSwitcherPanel.visible = false
 
             Rectangle {
                 anchors.fill: parent
@@ -112,11 +111,11 @@ Scope {
 
                 // Header
                 Text {
-                text: type == "move" ? "Move window to" : "Change active workspace to"
-                color: Config.Theme.launcherPrimaryText //root.theme.accentPrimary
-                font.pixelSize: 14
-                font.family: "Hack Nerd Font"
-                font.bold: true
+                    text: type == "move" ? "Move window to" : "Change active workspace to"
+                    color: Config.Theme.launcherPrimaryText //root.theme.accentPrimary
+                    font.pixelSize: 14
+                    font.family: "Hack Nerd Font"
+                    font.bold: true
                 }
 
                 // Search bar
@@ -127,7 +126,6 @@ Scope {
                     color: theme.bgSurface //root.theme.bgSurface
                     border.color: searchInput.activeFocus ? root.theme.accentPrimary : root.theme.bgBorder
                     border.width: 1
-
 
                     RowLayout {
                         anchors.fill: parent
@@ -168,16 +166,15 @@ Scope {
                                 verticalAlignment: Text.AlignVCenter
                             }
 
-
                             Keys.onEscapePressed: workspaceSwitcherPanel.visible = false
 
                             Keys.onPressed: event => {
-
                                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                     if (IntValidator)
-                                    event.accepted = true;
-                                    const entry = searchInput.text
-                                    if (entry) root.switchWorkspace(entry)
+                                        event.accepted = true;
+                                    const entry = searchInput.text;
+                                    if (entry)
+                                        root.switchWorkspace(entry);
                                 }
                             }
                         }
@@ -187,22 +184,23 @@ Scope {
         }
     }
     function switchWorkspace(entry, type) {
-        console.log(entry)
-        console.log(type)
+        console.log(entry);
+        console.log(type);
         if (root.type == "move") {
-            Hyprland.dispatch("movetoworkspace " + entry)
+            // TODO fix this
+            Hyprland.dispatch("hl.dispatch(hl.dsp.window.move({ workspace = " + entry + " }))");
         } else {
-            Hyprland.dispatch("workspace " + entry)
+            // TODO fix this
+            Hyprland.dispatch("hl.dispatch(hl.dsp.focus({ workspace = " + entry + " } }))"); //"workspace " + entry);
         }
-        
-        workspaceSwitcherPanel.visible = false
 
+        workspaceSwitcherPanel.visible = false;
     }
     function toggle(): void {
-        workspaceSwitcherPanel.visible = !workspaceSwitcherPanel.visible
+        workspaceSwitcherPanel.visible = !workspaceSwitcherPanel.visible;
         if (workspaceSwitcherPanel.visible) {
-            searchInput.text = ""
-            searchInput.forceActiveFocus()
+            searchInput.text = "";
+            searchInput.forceActiveFocus();
             /*console.log("active " + Hyprland.activeToplevel.wayland.activated)
             if (Hyprland.activeToplevel.wayland.activated !== false) {
                 activeWindow = Hyprland.activeToplevel.workspace
@@ -213,8 +211,7 @@ Scope {
                 console.log("no window")
                 workspaceSwitcherPanel.visible = false
             }*/
-            
-            
+
         }
     }
 }

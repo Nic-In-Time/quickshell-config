@@ -16,11 +16,11 @@ Scope {
         target: "launcher"
 
         function toggle(): void {
-            launcherPanel.visible = !launcherPanel.visible
+            launcherPanel.visible = !launcherPanel.visible;
             if (launcherPanel.visible) {
-                searchInput.text = ""
-                selectedIndex = 0
-                searchInput.forceActiveFocus()
+                searchInput.text = "";
+                selectedIndex = 0;
+                searchInput.forceActiveFocus();
             }
         }
     }
@@ -31,23 +31,21 @@ Scope {
         id: filteredApps
         objectProp: "id"
         values: {
-        const all = [...DesktopEntries.applications.values];
-        const q = searchInput.text.trim().toLowerCase();
-        if (q === "") return all.sort((a, b) => a.name.localeCompare(b.name));
-        return all.filter(d =>
-            (d.name && d.name.toLowerCase().includes(q)) ||
-            (d.genericName && d.genericName.toLowerCase().includes(q)) ||
-            (d.keywords && d.keywords.some(k => k.toLowerCase().includes(q))) ||
-            (d.categories && d.categories.some(c => c.toLowerCase().includes(q)))
-        ).sort((a, b) => {
-            const an = a.name.toLowerCase();
-            const bn = b.name.toLowerCase();
-            const aStarts = an.startsWith(q);
-            const bStarts = bn.startsWith(q);
-            if (aStarts && !bStarts) return -1;
-            if (!aStarts && bStarts) return 1;
-            return an.localeCompare(bn);
-        });
+            const all = [...DesktopEntries.applications.values];
+            const q = searchInput.text.trim().toLowerCase();
+            if (q === "")
+                return all.sort((a, b) => a.name.localeCompare(b.name));
+            return all.filter(d => (d.name && d.name.toLowerCase().includes(q)) || (d.genericName && d.genericName.toLowerCase().includes(q)) || (d.keywords && d.keywords.some(k => k.toLowerCase().includes(q))) || (d.categories && d.categories.some(c => c.toLowerCase().includes(q)))).sort((a, b) => {
+                const an = a.name.toLowerCase();
+                const bn = b.name.toLowerCase();
+                const aStarts = an.startsWith(q);
+                const bStarts = bn.startsWith(q);
+                if (aStarts && !bStarts)
+                    return -1;
+                if (!aStarts && bStarts)
+                    return 1;
+                return an.localeCompare(bn);
+            });
         }
     }
 
@@ -77,8 +75,8 @@ Scope {
 
         // Dark overlay backdrop
         MouseArea {
-        anchors.fill: parent
-        onClicked: launcherPanel.visible = false
+            anchors.fill: parent
+            onClicked: launcherPanel.visible = false
 
             Rectangle {
                 anchors.fill: parent
@@ -104,11 +102,11 @@ Scope {
 
                 // Header
                 Text {
-                text: "  Applications"
-                color: Config.Theme.launcherPrimaryText //root.theme.accentPrimary
-                font.pixelSize: 14
-                font.family: "Hack Nerd Font"
-                font.bold: true
+                    text: "  Applications"
+                    color: Config.Theme.launcherPrimaryText //root.theme.accentPrimary
+                    font.pixelSize: 14
+                    font.family: "Hack Nerd Font"
+                    font.bold: true
                 }
 
                 // Search bar
@@ -121,7 +119,9 @@ Scope {
                     border.width: 1
 
                     Behavior on border.color {
-                        ColorAnimation { duration: 150 }
+                        ColorAnimation {
+                            duration: 150
+                        }
                     }
 
                     RowLayout {
@@ -176,7 +176,8 @@ Scope {
                                     event.accepted = true;
                                     if (resultsList.count > 0) {
                                         const entry = filteredApps.values[root.selectedIndex];
-                                        if (entry) root.launchApp(entry);
+                                        if (entry)
+                                            root.launchApp(entry);
                                     }
                                 } else if (event.key === Qt.Key_Tab) {
                                     event.accepted = true;
@@ -238,7 +239,9 @@ Scope {
                         color: hoverArea.containsMouse && root.selectedIndex !== index ? Config.Theme.bgHover : "transparent"
 
                         Behavior on color {
-                            ColorAnimation { duration: 100 }
+                            ColorAnimation {
+                                duration: 100
+                            }
                         }
 
                         RowLayout {
@@ -327,31 +330,81 @@ Scope {
                     Row {
                         spacing: 4
                         Rectangle {
-                            width: hintUp.width + 8; height: 18; radius: 4; color: root.theme.bgSurface
-                            Text { id: hintUp; anchors.centerIn: parent; text: "↑↓"; color: theme.launcherPrimaryText /*root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font" }
+                            width: hintUp.width + 8
+                            height: 18
+                            radius: 4
+                            color: root.theme.bgSurface
+                            Text {
+                                id: hintUp
+                                anchors.centerIn: parent
+                                text: "↑↓"
+                                color: theme.launcherPrimaryText /*root.theme.textMuted*/
+                                font.pixelSize: 10
+                                font.family: "Hack Nerd Font"
+                            }
                         }
-                        Text { text: "navigate"; color: theme.launcherPrimaryText /*//root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font"; anchors.verticalCenter: parent.verticalCenter }
+                        Text {
+                            text: "navigate"
+                            color: theme.launcherPrimaryText /*//root.theme.textMuted*/
+                            font.pixelSize: 10
+                            font.family: "Hack Nerd Font"
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
 
                     Row {
                         spacing: 4
                         Rectangle {
-                            width: hintEnter.width + 8; height: 18; radius: 4; color: root.theme.bgSurface
-                            Text { id: hintEnter; anchors.centerIn: parent; text: "⏎"; color: theme.launcherPrimaryText /*root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font" }
+                            width: hintEnter.width + 8
+                            height: 18
+                            radius: 4
+                            color: root.theme.bgSurface
+                            Text {
+                                id: hintEnter
+                                anchors.centerIn: parent
+                                text: "⏎"
+                                color: theme.launcherPrimaryText /*root.theme.textMuted*/
+                                font.pixelSize: 10
+                                font.family: "Hack Nerd Font"
+                            }
                         }
-                        Text { text: "launch"; color: theme.launcherPrimaryText /*//root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font"; anchors.verticalCenter: parent.verticalCenter }
+                        Text {
+                            text: "launch"
+                            color: theme.launcherPrimaryText /*//root.theme.textMuted*/
+                            font.pixelSize: 10
+                            font.family: "Hack Nerd Font"
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
 
                     Row {
                         spacing: 4
                         Rectangle {
-                            width: hintEsc.width + 8; height: 18; radius: 4; color: root.theme.bgSurface
-                            Text { id: hintEsc; anchors.centerIn: parent; text: "esc"; color: theme.launcherPrimaryText /*root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font" }
+                            width: hintEsc.width + 8
+                            height: 18
+                            radius: 4
+                            color: root.theme.bgSurface
+                            Text {
+                                id: hintEsc
+                                anchors.centerIn: parent
+                                text: "esc"
+                                color: theme.launcherPrimaryText /*root.theme.textMuted*/
+                                font.pixelSize: 10
+                                font.family: "Hack Nerd Font"
+                            }
                         }
-                        Text { text: "close"; color: theme.launcherPrimaryText /*//root.theme.textMuted*/; font.pixelSize: 10; font.family: "Hack Nerd Font"; anchors.verticalCenter: parent.verticalCenter }
+                        Text {
+                            text: "close"
+                            color: theme.launcherPrimaryText /*//root.theme.textMuted*/
+                            font.pixelSize: 10
+                            font.family: "Hack Nerd Font"
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
 
-                    Item { Layout.fillWidth: true }
+                    Item {
+                        Layout.fillWidth: true
+                    }
                 }
             }
         }

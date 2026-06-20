@@ -9,24 +9,23 @@ import qs.modules.SettingsMenu
 import qs.config as Config
 
 Scope {
-    
+    id: root
+
     IpcHandler {
         target: "dashboard"
         function toggle(): void {
-            dashboardPanel.visible = !dashboardPanel.visible
+            dashboardPanel.visible = !dashboardPanel.visible;
         }
     }
 
     function toggle(): void {
-        dashboardPanel.visible = !dashboardPanel.visible
+        dashboardPanel.visible = !dashboardPanel.visible;
     }
-    
 
-    
-    
     property string currentTab: "media"
     property int numButtons: 3
     PanelWindow {
+        id: dashboardPanel
         /*PanelWindow {
             exclusionMode: ExclusionMode.Ignore
             focusable: false
@@ -44,7 +43,6 @@ Scope {
             }
         }*/
         visible: false
-        id: dashboardPanel
         exclusiveZone: 0
         //color: Config.Theme.colBg
         color: "transparent"
@@ -70,50 +68,50 @@ Scope {
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             Rectangle {
-                color: currentTab == "media" ? Config.Theme.activeTab : Config.Theme.inactiveTab
+                id: mediaButton
+                color: root.currentTab == "media" ? Config.Theme.activeTab : Config.Theme.inactiveTab
                 anchors.left: parent.left
                 anchors.top: parent.top
-                id: mediaButton
                 height: parent.height
-                
-                implicitWidth: parent.width / numButtons
+
+                implicitWidth: parent.width / root.numButtons
                 Text {
                     text: "media"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: currentTab = "media"
+                    onClicked: root.currentTab = "media"
                 }
             }
             Rectangle {
-                color: currentTab == "power" ? Config.Theme.activeTab : Config.Theme.inactiveTab
-                anchors.left: mediaButton.right
                 id: powerButton
+                color: root.currentTab == "power" ? Config.Theme.activeTab : Config.Theme.inactiveTab
+                anchors.left: mediaButton.right
                 height: parent.height
-                width: parent.width / numButtons
+                width: parent.width / root.numButtons
                 Text {
                     text: "power"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: currentTab = "power"
+                    onClicked: root.currentTab = "power"
                 }
             }
             Rectangle {
-                color: currentTab == "settings" ? Config.Theme.activeTab : Config.Theme.inactiveTab
-                anchors.left: powerButton.right
                 id: settingsButton
+                color: root.currentTab == "settings" ? Config.Theme.activeTab : Config.Theme.inactiveTab
+                anchors.left: powerButton.right
                 height: parent.height
-                width: parent.width / numButtons
+                width: parent.width / root.numButtons
                 Text {
                     text: "settings"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: currentTab = "settings"
+                    onClicked: root.currentTab = "settings"
                 }
             }
         }
@@ -121,7 +119,7 @@ Scope {
         /*TabBar {
             id: tabBar
             implicitWidth: parent.width
-            
+
             TabButton {
                 //border.width: 0
                 anchors.left: parent.left
@@ -133,29 +131,29 @@ Scope {
                 text: "power"
                 id: powerButton
             }
-            
-            
+
+
         }
         */
         Media {
-            visible: currentTab == "media"
             id: media
+            visible: root.currentTab == "media"
             anchors.top: tabBar.bottom
             anchors.topMargin: 3
             anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.centerIn: parent 
+            //anchors.centerIn: parent
             //implicitHeight: 60
-            
+
         }
         Power {
-            visible: currentTab == "power"
             id: power
+            visible: root.currentTab == "power"
             anchors.top: tabBar.bottom
             anchors.topMargin: 3
             anchors.horizontalCenter: parent.horizontalCenter
         }
         QuickSettings {
-            visible: currentTab == "settings"
+            visible: root.currentTab == "settings"
             anchors.top: tabBar.bottom
             anchors.topMargin: 3
             anchors.horizontalCenter: parent.horizontalCenter
@@ -163,5 +161,4 @@ Scope {
             width: parent.width - 60
         }
     }
-    
 }
