@@ -30,4 +30,6 @@ QtObject {
     // Font propertoes (Add text colour)
     readonly property string fontFamily: "JetBrainsMono Nerd Font"
     readonly property int fontSize:   14
+
+    readonly property int notifTimeout: 5000
 }

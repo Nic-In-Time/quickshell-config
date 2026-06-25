@@ -6,6 +6,7 @@ import "modules/Bar/"
 import "modules/Launcher/"
 import "modules/Dashboard/power/"
 import "modules/WorkspaceSwitcher/"
+import "modules/Notification/"
 import qs.modules.SettingsMenu
 
 ShellRoot {
@@ -23,5 +24,6 @@ ShellRoot {
         Bar {}
         WorkspaceSwitcher {}
         SettingsMenu {}
+	Notifications {}
     }
 }
