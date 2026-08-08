@@ -2,11 +2,13 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 import Quickshell.Io
+import QtQuick.Shapes
 
 import qs.config as Config
 import "../Dashboard/"
 //For testing
 import qs.services as Services
+import qs.Types
 
 Scope {
     property bool dashboardOpen: false
