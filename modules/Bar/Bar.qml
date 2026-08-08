@@ -19,43 +19,50 @@ Scope {
         }
         color: Config.Theme.colBg
     }
-    PanelWindow {
-        visible: true
-        color: "transparent"
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
+    Variants {
+        model: Quickshell.screens
+        delegate: Component {
 
+            PanelWindow {
+                required property var modelData
+                screen: modelData
+                visible: true
+                color: "transparent"
+                anchors {
+                    top: true
+                    left: true
+                    right: true
+                }
 
-        Rectangle {
-            anchors.fill: parent
+                Rectangle {
+                    anchors.fill: parent
 
-            bottomLeftRadius: 5
-            bottomRightRadius: 5
-            color: Config.Theme.colBg
+                    bottomLeftRadius: 5
+                    bottomRightRadius: 5
+                    color: Config.Theme.colBg
+                }
 
+                implicitHeight: Config.BarConfig.height
 
-        }
+                WorkspaceWidget {
+                    id: workspaces
+                }
 
+                BarSpacer {
+                    id: betweenWorkspaceAndKeyboard
+                    anchors.left: workspaces.right
+                }
 
-        implicitHeight: Config.BarConfig.height
+                Text {
+                    color: "white"
+                    anchors.left: betweenWorkspaceAndKeyboard.right
+                    anchors.verticalCenter: workspaces.verticalCenter
+                    text: Services.LayoutService.currentLayout
+                }
 
-        WorkspaceWidget {id: workspaces}
+                WindowTitle {}
 
-        BarSpacer {id: betweenWorkspaceAndKeyboard; anchors.left: workspaces.right}
-
-        Text {
-            color: "white"
-            anchors.left: betweenWorkspaceAndKeyboard.right
-            anchors.verticalCenter: workspaces.verticalCenter
-            text: Services.LayoutService.currentLayout
-        }
-
-        WindowTitle {}
-
-        /*Rectangle {
+                /*Rectangle {
             anchors.right: betweenDashAndPower.left
             width: 30
             height: parent.height
@@ -71,49 +78,64 @@ Scope {
             }
         }*/
 
-        BarSpacer {id: betweenDashAndPower; anchors.right: dash.left}
+                BarSpacer {
+                    id: betweenDashAndPower
+                    anchors.right: dash.left
+                }
 
-        Rectangle {
-            id: dash
-            anchors.right: betweenBatteryAndDash.left
-            width: dashText.width
-            height: 30
-            color: "transparent"
-            Text {
-                id: dashText
-                text: "Open Dashboard"
-                color: "white"
+                Rectangle {
+                    id: dash
+                    anchors.right: betweenBatteryAndDash.left
+                    width: dashText.width
+                    height: 30
+                    color: "transparent"
+                    Text {
+                        id: dashText
+                        text: "Open Dashboard"
+                        color: "white"
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: dashboard.toggle()
+                        hoverEnabled: true
+                        //For testing
+                        onEntered: console.log(Services.MediaPlayer.players.length + " " + Services.MediaPlayer.players)
+                    }
+                }
+                BarSpacer {
+                    id: betweenBatteryAndDash
+                    anchors.right: battery.left
+                }
+                BatteryWidget {
+                    id: battery
+                    anchors.right: betweenMediaAndBattery.left
+                }
+
+                BarSpacer {
+                    id: betweenMediaAndBattery
+                    anchors.right: clock.left
+                }
+
+                ClockWidget {
+                    id: clock
+                    anchors.right: rightSpacer.left
+                    color: "white"
+                }
+                BarSpacer {
+                    id: rightSpacer
+                    anchors.right: parent.right
+                    width: 5
+                }
             }
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: dashboard.toggle()
-                hoverEnabled: true
-                //For testing
-                onEntered: console.log(Services.MediaPlayer.players.length + " " + Services.MediaPlayer.players)
-            }
         }
-        BarSpacer {id: betweenBatteryAndDash; anchors.right: battery.left}
-        BatteryWidget {
-            id: battery
-            anchors.right: betweenMediaAndBattery.left
-        }
-
-        BarSpacer {id: betweenMediaAndBattery; anchors.right: clock.left}
-
-        ClockWidget {
-            id: clock
-            anchors.right: rightSpacer.left
-            color: "white"
-        }
-        BarSpacer {id: rightSpacer; anchors.right: parent.right; width: 5}
     }
-    Dashboard {id: dashboard}
+    Dashboard {
+        id: dashboard
+    }
     function powerMenu() {
-
-        Quickshell.execDetached ({
+        Quickshell.execDetached({
             command: ["~/.config/nic4k/wlogout.sh"]
-        })
-
+        });
     }
 }

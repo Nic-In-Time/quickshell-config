@@ -24,6 +24,6 @@ ShellRoot {
         Bar {}
         WorkspaceSwitcher {}
         SettingsMenu {}
-	Notifications {}
+        Notifications {}
     }
 }

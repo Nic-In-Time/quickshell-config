@@ -7,11 +7,15 @@ import "power/"
 
 Rectangle {
     id: root
-    
+
     color: "transparent"
     width: parent.width
     anchors.horizontalCenter: parent.horizontalCenter
-    PowerProfiles {width: parent.width / 2; id: powerProfiles; anchors.left: powerStatus.right}
+    PowerProfiles {
+        id: powerProfiles
+        width: parent.width / 2
+        anchors.left: powerStatus.right
+    }
     /*Text {
         id: topText
         anchors.horizontalCenter: parent.horizontalCenter
@@ -30,7 +34,7 @@ Rectangle {
         color: "transparent"
         Rectangle {
             id: balanced
-            
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             width: 50
@@ -85,7 +89,8 @@ Rectangle {
             }
         }
     }*/
-    PowerStatus {width: parent.width / 2; id: powerStatus}
-    
-    
+    PowerStatus {
+        id: powerStatus
+        width: parent.width / 2
+    }
 }

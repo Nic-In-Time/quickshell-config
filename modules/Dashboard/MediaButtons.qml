@@ -6,7 +6,7 @@ import qs.config as Config
 import qs.services as Services
 
 RowLayout {
-    
+
     Text {
         id: back
         text: "󰒮"
@@ -20,7 +20,7 @@ RowLayout {
     }
     Text {
         id: pausePlay
-        text: Services.MediaPlayer.activeSpotifyPlayer.playbackState == true ? "󰏤" : "󰐊" 
+        text: Services.MediaPlayer.activeSpotifyPlayer.playbackState == true ? "󰏤" : "󰐊"
         color: "white"
         font.family: Config.Theme.fontFamily
         font.pixelSize: Config.Theme.fontSize
@@ -40,5 +40,6 @@ RowLayout {
             onClicked: Services.MediaPlayer.activeSpotifyPlayer.next()
         }
     }
-    function nothing() {}
+    function nothing() {
+    }
 }
