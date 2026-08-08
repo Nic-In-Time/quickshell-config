@@ -80,7 +80,7 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                color: Config.Theme.semiTransBackground //root.theme.bgOverlay
+                color: Config.Theme.barelyDarken //root.theme.bgOverlay
             }
         }
 

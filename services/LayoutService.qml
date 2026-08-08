@@ -6,21 +6,22 @@ import Quickshell
 import Quickshell.Io
 
 Singleton {
+    id: layoutService
     Process {
-        running: true
         id: getLayout
-        command: ["sh","-c", "hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap'"]
+        running: true
+        command: ["sh", "-c", "hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap'"]
         stdout: StdioCollector {
             onStreamFinished: layoutService.currentLayout = this.text
         }
     }
-    id: layoutService
 
     property string currentLayout // This is empty on startup. We could default it to "en", but we don't know the user's configured layout order (e.g. "en,ru" vs "ru,en").
     // I haven't found a way to query the initial layout from QML without external bash scripts, so this is the safest compromise for now.
 
     function parseLayout(fullLayoutName) {
-        if (!fullLayoutName) return;
+        if (!fullLayoutName)
+            return;
 
         const shortName = fullLayoutName.substring(0, 2).toLowerCase();
 
@@ -35,7 +36,7 @@ Singleton {
             const layoutInfo = dataString.split(",");
             const fullLayoutName = layoutInfo[layoutInfo.length - 1];
 
-            currentLayout = fullLayoutName
+            currentLayout = fullLayoutName;
 
             //parseLayout(fullLayoutName);
         }

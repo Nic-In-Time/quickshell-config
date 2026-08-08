@@ -11,10 +11,8 @@ Singleton {
     property MprisPlayer activePlayer: players[0]
 
     function isSpotify(player) {
-        return player.dbusName === "org.mpris.MediaPlayer2.spotify" ? player : nothing()
-        
+        return player.dbusName === "org.mpris.MediaPlayer2.spotify" ? player : nothing();
     }
     function nothing() {
-        
     }
 }

@@ -53,7 +53,7 @@ RowLayout {
 
                 hoverEnabled: true
 
-                onEntered: rectangle.color = Qt.rgba(0.92, 0.31, 1, 0.47)
+                onEntered: rectangle.color = Config.Theme.hoverDarken
                 onExited: rectangle.color = "transparent"
             }
         }

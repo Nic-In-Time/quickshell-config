@@ -23,5 +23,4 @@ Rectangle {
         anchors.fill: fullSettingsButton
         onClicked: pass
     }
-
 }

@@ -8,14 +8,14 @@ import QtQuick.Controls
 import qs.config as Config
 
 PanelWindow {
-    visible: false
     id: panel
+    visible: false
     IpcHandler {
         target: "settings"
         function toggle(): void {
             // Currently set to super alt d
-            console.log("hi")
-            panel.visible = !panel.visible
+            console.log("hi");
+            panel.visible = !panel.visible;
         }
     }
     width: 1000
@@ -43,6 +43,7 @@ PanelWindow {
                         text: "Splash"
                     }
                     ComboBox {
+                        id: splashOptions
 
                         Process {
                             id: getValue
@@ -50,22 +51,21 @@ PanelWindow {
                             command: ["sh", "-c", "awk '/^splash/{print $NF}' ~/.config/hypr/hyprpaper.conf"]
                             stdout: StdioCollector {
                                 onStreamFinished: {
-                                    getValue.handleOutput(this.text.trim())
+                                    getValue.handleOutput(this.text.trim());
                                 }
                             }
                             function handleOutput(text) {
-
-                                console.log(text + " iis current")
-                                var currentValue = text.charAt(0).toUpperCase() + text.slice(1)
-                                console.log(currentValue + " is new whatever")
-                                var newValueNum = splashOptions.find(currentValue)
-                                console.log("new value is " + newValueNum)
-                                var newValue = splashOptions.currentText
-                                console.log("idk this is " + newValue)
-                                newValue = newValue.toLowerCase()
-                                temp.newCommand = "sed -i 's/^\\(splash =\\).*/\\1 " + newValue + "/' ~/.config/hypr/hyprpaper.conf" + ""
-                                console.log(temp.newCommand)
-                                temp.running = true
+                                console.log(text + " iis current");
+                                var currentValue = text.charAt(0).toUpperCase() + text.slice(1);
+                                console.log(currentValue + " is new whatever");
+                                var newValueNum = splashOptions.find(currentValue);
+                                console.log("new value is " + newValueNum);
+                                var newValue = splashOptions.currentText;
+                                console.log("idk this is " + newValue);
+                                newValue = newValue.toLowerCase();
+                                temp.newCommand = "sed -i 's/^\\(splash =\\).*/\\1 " + newValue + "/' ~/.config/hypr/hyprpaper.conf" + "";
+                                console.log(temp.newCommand);
+                                temp.running = true;
                             }
                         }
                         Process {
@@ -77,19 +77,17 @@ PanelWindow {
                             }
                             stdout: StdioCollector {
                                 onStreamFinished: {
-                                    console.log(this.text)
-
+                                    console.log(this.text);
                                 }
                             }
                         }
-                        id: splashOptions
                         //property var idk: getCurrentIndex()
                         model: ["True", "False"]
                         //onCurrentIndexChanged: getCurrentIndex()//console.log(idk)
                         onActivated: getCurrentIndex()
                         //Remane this because its confusing
                         function getCurrentIndex() {
-                            getValue.running = true
+                            getValue.running = true;
                             //await getValue.running == false
 
                             //return currentValue
@@ -106,9 +104,5 @@ PanelWindow {
                 }*/
             }
         }
-
-
-
     }
-
 }

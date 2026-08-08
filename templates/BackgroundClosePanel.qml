@@ -7,10 +7,10 @@ PanelWindow {
     exclusionMode: ExclusionMode.Ignore
     focusable: false
     anchors {
-        top:true
-        left:true
-        right:true
-        bottom:true
+        top: true
+        left: true
+        right: true
+        bottom: true
     }
     visible: popup.visible
     color: "transparent"
