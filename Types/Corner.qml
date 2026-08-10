@@ -7,10 +7,11 @@ Rectangle {
     // widthVar: the width of the shape.
     // heightVar: the height of the shape.
     // control vars: where the curve "pulls" towards.
-    required property var widthVar
-    required property var heightVar
-    required property var controlXvar
-    required property var controlYvar
+    required property int widthVar
+    required property int heightVar
+    required property int controlXvar
+    required property int controlYvar
+    property string cornerColor
 
     height: heightVar
     width: widthVar
@@ -20,7 +21,8 @@ Rectangle {
         width: parent.width
         height: parent.height
         ShapePath {
-            fillColor: "white"
+            fillColor: root.cornerColor === "" ? "white" : root.cornerColor
+            strokeColor: "transparent"
             startX: shape.getStartXPos()
             startY: 0
             PathQuad {
