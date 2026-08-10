@@ -26,30 +26,30 @@ Rectangle {
             PathQuad {
                 x: shape.getEndXPos()
                 y: root.height
-                controlX: controlXvar
-                controlY: controlYvar
+                controlX: root.controlXvar
+                controlY: root.controlYvar
             }
 
             PathLine {
-                x: controlXvar > root.width / 2 ? root.width : 0
-                y: controlYvar > root.height / 2 ? root.height : 0
+                x: root.controlXvar > root.width / 2 ? root.width : 0
+                y: root.controlYvar > root.height / 2 ? root.height : 0
             }
 
             PathLine {
-                x: controlXvar > root.width / 2 ? root.width : 0
-                y: controlYvar > root.height / 2 ? root.height : 0
+                x: root.controlXvar > root.width / 2 ? root.width : 0
+                y: root.controlYvar > root.height / 2 ? root.height : 0
             }
         }
 
         function getStartXPos() {
-            if (controlXvar > root.width / 2) {
-                if (controlYvar > root.height / 2) {
+            if (root.controlXvar > root.width / 2) {
+                if (root.controlYvar > root.height / 2) {
                     return root.width;
                 } else {
                     return 0;
                 }
             } else {
-                if (controlYvar > root.height / 2) {
+                if (root.controlYvar > root.height / 2) {
                     return 0;
                 } else {
                     return root.width;
@@ -57,14 +57,14 @@ Rectangle {
             }
         }
         function getEndXPos() {
-            if (controlXvar > root.width / 2) {
-                if (controlYvar > root.height / 2) {
+            if (root.controlXvar > root.width / 2) {
+                if (root.controlYvar > root.height / 2) {
                     return 0;
                 } else {
                     return root.width;
                 }
             } else {
-                if (controlYvar > root.height / 2) {
+                if (root.controlYvar > root.height / 2) {
                     return root.width;
                 } else {
                     return 0;
