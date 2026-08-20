@@ -3,19 +3,50 @@ import Quickshell.Wayland
 import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
+import QtQml.Models
+import Quickshell.Io
 
 import qs.config as Config
 
 Scope {
     id: root
+    property bool centerOpen: false
+    property var history: ListModel {
+        id: history
+    }
 
     NotificationServer {
         id: server
         actionsSupported: true
         bodySupported: true
         imageSupported: true
+        /*ListModel {
+            id: history
+    }*/
 
-        onNotification: n => n.tracked = true
+        onNotification: n => {
+            history.insert(0, {
+                summary: n.summary,
+                body: n.body,
+                appName: n.appName,
+                urgency: n.urgency,
+                time: Qt.formatDateTime(new Date(), "HH:mm")
+            });
+            n.tracked = true;
+        }
+    }
+
+    IpcHandler {
+        target: "notifications"
+        function toggle(): void {
+            root.centerOpen = !root.centerOpen;
+        }
+        function show(): void {
+            root.centerOpen = true;
+        }
+        function hide(): void {
+            root.centerOpen = false;
+        }
     }
 
     PanelWindow {

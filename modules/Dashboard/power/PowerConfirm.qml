@@ -7,15 +7,15 @@ import QtQuick.Layouts
 
 import qs.config as Config
 
-
 PanelWindow {
-    
-    //Keys.onEscapePressed: console.log("hi") //color = "white"//launcherPanel.visible = 
-    
+    id: powerConfirmPanel
+
+    //Keys.onEscapePressed: console.log("hi") //color = "white"//launcherPanel.visible =
+
     IpcHandler {
         target: "power"
         function toggle() {
-            powerConfirmPanel.visible = !powerConfirmPanel.visible
+            powerConfirmPanel.visible = !powerConfirmPanel.visible;
             /* Responsive power menu
             if (launcherPanel.visible) {
                 powerInput.text = ""
@@ -25,18 +25,12 @@ PanelWindow {
             */
         }
     }
-    
-    
-    id: powerConfirmPanel
     visible: false
     focusable: true
     //focusable: false
     color: "transparent"
 
-    
-
     exclusionMode: ExclusionMode.Ignore
-    
 
     anchors {
         top: true
@@ -47,9 +41,9 @@ PanelWindow {
 
     // Dark overlay backdrop
     MouseArea {
-    anchors.fill: parent
-    // Add a mask of the power confirm box id
-    onClicked: powerConfirmPanel.visible = false
+        anchors.fill: parent
+        // Add a mask of the power confirm box id
+        onClicked: powerConfirmPanel.visible = false
 
         Rectangle {
             anchors.fill: parent
@@ -87,11 +81,10 @@ PanelWindow {
             width: 580
             height: 240
             RowLayout {
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.verticalCenter
-                anchors.bottomMargin: 5
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.bottomMargin: 5
                 implicitHeight: parent.height / 2 - 10
-                width: 540
+                implicitWidth: 540
                 Rectangle {
                     radius: 5
                     color: Config.Theme.colMuted
@@ -195,7 +188,6 @@ PanelWindow {
                             onStreamFinished: powerConfirmPanel.visible = false
                         }
                     }
-                    
                 }
                 Rectangle {
                     radius: 5

@@ -18,8 +18,8 @@ PanelWindow {
             panel.visible = !panel.visible;
         }
     }
-    width: 1000
-    height: 800
+    implicitWidth: 1000
+    implicitHeight: 800
     Text {
         id: topText
         text: "Settings"
